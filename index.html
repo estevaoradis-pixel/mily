@@ -102,7 +102,6 @@
     font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;letter-spacing:.14em;
     padding:9px 20px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)}
   .replay.show{opacity:.85;visibility:visible}
-  #yt-player{position:fixed;left:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none;z-index:-1;border:0}
 </style>
 </head>
 <body>
@@ -142,7 +141,6 @@
 
     <div class="vig"></div>
 
-    <div id="yt-player"></div>
     <button class="replay" id="replay">&#8635; ver de novo</button>
 
     <div class="intro" id="intro">
@@ -155,15 +153,6 @@
   </div>
 
 <script>
-  /* musica de fundo pelo player oficial do youtube (sem baixar/hospedar nada) */
-  var ytPlayer=null;
-  function onYouTubeIframeAPIReady(){
-    ytPlayer=new YT.Player('yt-player',{videoId:'lSwiHA8gymg',
-      playerVars:{controls:0,disablekb:1,fs:0,modestbranding:1,playsinline:1,rel:0},
-      events:{onReady:function(){try{ytPlayer.mute();ytPlayer.playVideo();}catch(e){}}}});
-  }
-  (function(){var t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);})();
-
   /* rosa */
   (function(){
     var rose=document.getElementById('rose'),fit=document.getElementById('fit');
@@ -232,7 +221,7 @@
 
   (function(){
     var intro=document.getElementById('intro'),started=false;
-    function go(){if(started)return;started=true;intro.classList.add('hide');play();try{if(window.ytPlayer&&ytPlayer.playVideo){ytPlayer.seekTo(0,true);ytPlayer.unMute();ytPlayer.setVolume(55);ytPlayer.playVideo();}}catch(e){}}
+    function go(){if(started)return;started=true;intro.classList.add('hide');play();}
     intro.addEventListener('click',go);intro.addEventListener('touchstart',function(){go();},{passive:true});
     document.getElementById('replay').addEventListener('click',function(e){e.stopPropagation();location.reload();});
   })();
