@@ -154,6 +154,9 @@
   </div>
 
 <script>
+  /* pre-baixa a musica pro cache durante a intro, pra comecar sem atraso no toque */
+  (function(){try{fetch('musica.mp3').then(function(r){return r.blob();}).catch(function(){});}catch(e){}})();
+
   /* rosa */
   (function(){
     var rose=document.getElementById('rose'),fit=document.getElementById('fit');
