@@ -159,7 +159,8 @@
   var ytPlayer=null;
   function onYouTubeIframeAPIReady(){
     ytPlayer=new YT.Player('yt-player',{videoId:'lSwiHA8gymg',
-      playerVars:{controls:0,disablekb:1,fs:0,modestbranding:1,playsinline:1,rel:0},events:{}});
+      playerVars:{controls:0,disablekb:1,fs:0,modestbranding:1,playsinline:1,rel:0},
+      events:{onReady:function(){try{ytPlayer.mute();ytPlayer.playVideo();}catch(e){}}}});
   }
   (function(){var t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);})();
 
@@ -231,7 +232,7 @@
 
   (function(){
     var intro=document.getElementById('intro'),started=false;
-    function go(){if(started)return;started=true;intro.classList.add('hide');play();try{if(window.ytPlayer&&ytPlayer.playVideo){ytPlayer.setVolume(55);ytPlayer.playVideo();}}catch(e){}}
+    function go(){if(started)return;started=true;intro.classList.add('hide');play();try{if(window.ytPlayer&&ytPlayer.playVideo){ytPlayer.seekTo(0,true);ytPlayer.unMute();ytPlayer.setVolume(55);ytPlayer.playVideo();}}catch(e){}}
     intro.addEventListener('click',go);intro.addEventListener('touchstart',function(){go();},{passive:true});
     document.getElementById('replay').addEventListener('click',function(e){e.stopPropagation();location.reload();});
   })();
