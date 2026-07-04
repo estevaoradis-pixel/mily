@@ -141,6 +141,7 @@
 
     <div class="vig"></div>
 
+    <audio id="song" src="musica.mp3" preload="auto" loop></audio>
     <button class="replay" id="replay">&#8635; ver de novo</button>
 
     <div class="intro" id="intro">
@@ -221,7 +222,7 @@
 
   (function(){
     var intro=document.getElementById('intro'),started=false;
-    function go(){if(started)return;started=true;intro.classList.add('hide');play();}
+    function go(){if(started)return;started=true;intro.classList.add('hide');play();var s=document.getElementById('song');if(s){s.volume=.6;s.play().catch(function(){});}}
     intro.addEventListener('click',go);intro.addEventListener('touchstart',function(){go();},{passive:true});
     document.getElementById('replay').addEventListener('click',function(e){e.stopPropagation();location.reload();});
   })();
