@@ -102,6 +102,13 @@
     font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;letter-spacing:.14em;
     padding:9px 20px;border-radius:100px;cursor:pointer;backdrop-filter:blur(4px)}
   .replay.show{opacity:.85;visibility:visible}
+  .song{position:absolute;z-index:7;top:max(3.4vh,env(safe-area-inset-top));right:5vw;
+    display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+    opacity:0;visibility:hidden;transition:opacity .9s ease,visibility .9s;
+    background:rgba(255,255,255,.06);border:1px solid rgba(243,205,127,.4);color:var(--gold-soft);
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:.08em;
+    padding:8px 15px;border-radius:100px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .song.show{opacity:.9;visibility:visible}
 </style>
 </head>
 <body>
@@ -141,6 +148,7 @@
 
     <div class="vig"></div>
 
+    <a class="song" id="songbtn" href="https://www.youtube.com/watch?v=lSwiHA8gymg" target="_blank" rel="noopener">&#127925; nossa m&uacute;sica</a>
     <button class="replay" id="replay">&#8635; ver de novo</button>
 
     <div class="intro" id="intro">
@@ -221,7 +229,7 @@
 
   (function(){
     var intro=document.getElementById('intro'),started=false;
-    function go(){if(started)return;started=true;intro.classList.add('hide');play();}
+    function go(){if(started)return;started=true;intro.classList.add('hide');play();var sb=document.getElementById('songbtn');if(sb){setTimeout(function(){sb.classList.add('show');},1400);}}
     intro.addEventListener('click',go);intro.addEventListener('touchstart',function(){go();},{passive:true});
     document.getElementById('replay').addEventListener('click',function(e){e.stopPropagation();location.reload();});
   })();
